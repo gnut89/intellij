@@ -1,25 +1,32 @@
-import java.util.Arrays;
 import java.util.Scanner;
-
 public class Solution {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int t = sc.nextInt();
-        while (t > 0) {
-            long n = sc.nextLong();
-            long k = sc.nextLong();
-            boolean check = false;
-            for (int x = 0; x < 2; x++) {
-                if (n - x * k >= 0 && (n - x * k) % 2 == 0) {
-                    System.out.println("YES");
-                    check = true;
-                    break;
+        int q = sc.nextInt();
+        while (q-- > 0) {
+            int n = sc.nextInt();
+            int t = sc.nextInt();
+            int[] a = new int[n];
+            int[] b = new int[n];
+            for (int i = 0; i < n; i++) {
+                a[i] = sc.nextInt();
+            }
+            for (int i = 0; i < n; i++) {
+                b[i] = sc.nextInt();
+            }
+            int ans = -1, time = 0;
+            for (int i = 0; i < n - 1; i++) {
+                if (time != t) {
+                    if (b[i] < b[i + 1]) {
+                        time++;
+                        ans = i + 1;
+                    } else {
+                        ans = i;
+                        time += a[i];
+                    }
                 }
             }
-            if (check == false) {
-                System.out.println("NO");
-            }
-            t--;
+            System.out.println(ans + 1);
         }
     }
 }
